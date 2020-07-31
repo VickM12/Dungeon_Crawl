@@ -1,0 +1,13 @@
+body{
+    background-color: gray;
+}
+.topBanner{
+    text-transform: uppercase;
+    font-family: 'Grenze Gotisch', cursive;
+    font-size: 50px;
+}
+
+.gameBox{}
+#textbox{}
+#console{}
+.buttons{}
