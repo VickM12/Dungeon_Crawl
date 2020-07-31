@@ -61,10 +61,10 @@ const $welcome = $(`<p id="welcome">Welcome ${$inputValue}! We have been terrori
 
 const $enterDungeon= $('<p id="forkInPath">As you enter the dungeon, a musty smell assaults your nostrils. Lamps light the way through the dark hallway. You come to an intersection. Do you go left, right, or keep going straight?</p>')
 ///Buttons///
-const $enter = $('.buttons')
+const $enter = $('<div class="buttons" id="enter">')
 $enter.text('Enter')
 
-const $left = $('.buttons');
+const $left = $('<div class="buttons" id="left">');
 $left.text('Go left')
 /////////////////////////Functions/////////////
 
@@ -75,12 +75,12 @@ $enter.appendTo('#console')
 }
 
 /////take Player name///////
-// ('form').on('submit', (event)=>{
-//     event.preventDefault(); 
-//     $welcome.appendTo($('#gameText'));
-// console.log($inputValue);
-// $(event.currentTarget).trigger('reset');  
-// });
+$('form').on('submit', (event)=>{
+    event.preventDefault(); 
+    $welcome.appendTo($('#gameText'));
+console.log($inputValue);
+$(event.currentTarget).trigger('reset');  
+});
 ///////Insert player name to Player character////
 
 ///////Set the scene/////
@@ -90,8 +90,9 @@ const enterDungeon = () =>{
     $enter.remove()
     $welcome.remove()
     $enterDungeon.appendTo($('#gameText'))
+    $left.appendTo('#console')
 }
-$enter.on('click', enterDungeon())
+$enter.on('click', enterDungeon)
 //////Go left, pick up beer///////
 //////go back///
 
