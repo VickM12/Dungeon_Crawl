@@ -1,6 +1,9 @@
 console.log($)
 //////////////////Constants and Objects///////
-// const input = 
+let $inputValue = $("#input-box").val(); 
+
+    
+    
 ///Character Class///
 class Character {
     constructor (name= "", health= 0, strength= 0, dexterity=0, items= []){
@@ -13,7 +16,7 @@ class Character {
 }
 ///Player class///
 class Player extends Character {
-    constructor (name=`${input.val()}`, health = 20, strength = 5, dexterity = 0.7, items =[]){
+    constructor (name=`${$inputValue}`, health = 20, strength = 5, dexterity = 0.7, items =[]){
         super(name, health, strength, dexterity, items)
         // this.name= name;
         // this.health = health;
@@ -32,7 +35,7 @@ class Player extends Character {
 }
 ///Dragon class///
 class Dragon extends Character {
-    constructor (name=`${input.val()}`, health = 20, strength = 5, dexterity = 0.6, items =[]){
+    constructor (name=`${$inputValue}`, health = 20, strength = 5, dexterity = 0.6, items =[]){
         super(name, health, strength, dexterity, items)
         // this.name= name;
         // this.health = health;
@@ -50,24 +53,45 @@ class Dragon extends Character {
     }
 }
 
-const player = new Player (`${input.val}`)
-const dragon = new Dragon ("Kh'o Vah", items['gold coins'])
+const player = new Player (`${$inputValue}`)
+const dragon = new Dragon ("Kh'o Vah", items = ['gold coins'])
 ////Divs to be appended///
 ///Text boxes///
-///Buttons///
+const $welcome = $(`<p id="welcome">Welcome ${$inputValue}! We have been terrorized by the mighty dragon, Kh'o Vah, will you enter the dungeon and slay the beast?</p>`)
 
+const $enterDungeon= $('<p id="forkInPath">As you enter the dungeon, a musty smell assaults your nostrils. Lamps light the way through the dark hallway. You come to an intersection. Do you go left, right, or keep going straight?</p>')
+///Buttons///
+const $enter = $('.buttons')
+$enter.text('Enter')
+
+const $left = $('.buttons');
+$left.text('Go left')
 /////////////////////////Functions/////////////
 
 /////Display the instructions////
+const startGame = () =>{
+    $welcome.appendTo($('#gameText'))
+$enter.appendTo('#console')
+}
 
 /////take Player name///////
-
+// ('form').on('submit', (event)=>{
+//     event.preventDefault(); 
+//     $welcome.appendTo($('#gameText'));
+// console.log($inputValue);
+// $(event.currentTarget).trigger('reset');  
+// });
 ///////Insert player name to Player character////
 
 ///////Set the scene/////
 
 ////////Choice to go left, right, or straight////
-
+const enterDungeon = () =>{
+    $enter.remove()
+    $welcome.remove()
+    $enterDungeon.appendTo($('#gameText'))
+}
+$enter.on('click', enterDungeon())
 //////Go left, pick up beer///////
 //////go back///
 
@@ -79,3 +103,8 @@ const dragon = new Dragon ("Kh'o Vah", items['gold coins'])
 
 //////Dragon fight///////
 
+
+
+
+
+onLoad=startGame()
