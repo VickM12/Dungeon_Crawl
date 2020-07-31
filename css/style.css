@@ -7,7 +7,25 @@ body{
     font-size: 50px;
 }
 
-.gameBox{}
-#textbox{}
-#console{}
+.gameBox{
+    witdh:80%;
+    height:600px;
+    border:2px;
+    border-color: black;
+    border-style: solid;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+}
+#textbox{
+    width:60%;
+    height: 400px;
+    background-color: ghostwhite;
+    margin: 10px;
+}
+#console{
+    width:60%;
+    height: 150px;
+    border: 2px solid black;
+}
 .buttons{}

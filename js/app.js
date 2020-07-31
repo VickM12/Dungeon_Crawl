@@ -2,6 +2,7 @@ console.log($)
 //////////////////Constants and Objects///////
 
 ///Character Class///
+class Character = 
 ///Player class///
 ///Dragon class///
 
