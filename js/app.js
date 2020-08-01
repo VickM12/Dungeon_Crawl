@@ -55,6 +55,10 @@ class Dragon extends Character {
 
 const player = new Player (`${$inputValue}`)
 const dragon = new Dragon ("Kh'O Vah", items = ['gold coins'])
+const ale = {
+    name: "Ale",
+    property: player.heatlh= player.heatlh +5
+}
 ////Divs to be appended///
 ///Text boxes///
 const $welcome = $(`<p id="welcome">Welcome Adventurer! We, the local villagers have been terrorized by the mighty dragon, Kh'O Vah, will you enter the dungeon and slay the beast?</p>`)
@@ -104,6 +108,18 @@ $rightButton.text('Go right');
 const $straightButton = $('<div class="buttons" id="straight">');
 $straightButton.text('Go straight');
 
+const $explore =$('<div class ="buttons" id="explore">');
+$explore.text('explore');
+
+const $goBack = $ ('<div class="buttons" id="goBack">');
+$goBack.text('go back');
+
+const $takeItem = $('<div class="buttons" id="takeItem">');
+$takeItem.text('take item');
+
+const $fightDragon =$('<div class="buttons" id="fightDragon">')
+$fightDragon.text('fight the dragon')
+
 /////////////////////////Functions/////////////
 
 /////Display the instructions////
@@ -122,11 +138,62 @@ const enterDungeon = () =>{
     $welcome.remove()
     $enterDungeon.appendTo($('#gameText'))
     $leftButton.appendTo('#console')
+    $rightButton.appendTo('#console')
+    $straightButton.appendTo('#console')
 }
-$enterButton.on('click', enterDungeon)
-//////Go left, pick up beer///////
+const goBack =()=>{
+    $goLeft.detach()
+    $goRight.detach()
+    $goStraight.detach()
+    $explore.detach()
+    $goBack.detach()
+    $takeAle.detach()
+    $takeSword.detach()
+    
+    $turnBack.appendTo($('gameBox'))
+    $enterDungeon.appendTo($('#gameText'))
+    $leftButton.appendTo('#console')
+    $rightButton.appendTo('#console')
+    $straightButton.appendTo('#console')
+
+}
 const goLeft =()=>{
-    $
+    $enterDungeon.detach();
+    $leftButton.detach();
+    $rightButton.detach();
+    $straightButton.detach();
+    
+    $goLeft.appendTo($('#gameText'));
+    $explore.appendTo($('#console'));
+    $goBack.appendTo($('#console'));
+
+
+    $explore.on('click', event=>{
+        $explore.detach()
+        $goLeft.detach();
+
+        $exploreAleRoom.appendTo($('#gameBox'))
+        $takeItem.appendTo($('#console'))
+
+            $takeItem.on('click', event=>{
+                $exploreAleRoom.detach()
+                $takeAle.appendTo($('#textbox'))
+                player.items.push(ale)
+            })
+        })
+}
+
+const goStraight =()=>{
+    $enterDungeon.detach();
+    $leftButton.detach();
+    $rightButton.detach();
+    $straightButton.detach();
+    
+    $goStraight.appendTo($('#gameText'));
+    $explore.appendTo($('#console'));
+    $goBack.appendTo($('#console'));
+}
+
 
 //////go back///
 
@@ -140,6 +207,7 @@ const goLeft =()=>{
 
 
 
-
-
+$leftButton.on('click', goLeft)
+$goBack.on('click', goBack)
+$enterButton.on('click', enterDungeon)
 onLoad=startGame()
