@@ -294,8 +294,7 @@ const dragonFight =()=>{
         //         $dragonDeath.appendTo($('#gameText'))
         //         }
         // }) 
-    } 
-}
+} 
 
   
 
