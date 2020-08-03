@@ -26,9 +26,9 @@ class Player extends Character {
     }
     attackDragon(dragon){
         if (Math.random() <= dragon.dexterity) {
-            displayPlayerAttack()
+            $playerAttack.appendTo($('#gameText'))
              dragon.health= dragon.health - this.strength;
-        }   else displayPlayerMissedAttack()
+        }   else $playerMiss.appendTo($('#gameText'))
     return dragon.health
     }
     
@@ -45,9 +45,9 @@ class Dragon extends Character {
     }
     attackPlayer(player){
         if (Math.random() <= player.dexterity) {
-            displayDragonAttack()
+            $dragonAttack.appendTo($('#gameText'))
              player.health= player.health - this.strength;
-        }   else displayDragonMissedAttack()
+        }   else $dragonMiss.appendTo($('#gameText'))
     return player.health
 
     }
@@ -219,6 +219,7 @@ const goStraight =()=>{
             $takeSword.detach();
             $exploreLightRoom.detach();
             $takeItem.detach();
+            $takeAle.detach();
 
             $takeSword.appendTo($('#gameText'));
             player.items.push(sword);
@@ -245,39 +246,29 @@ const drinkAle=()=>{
 }
 const dragonFight =()=>{
     $fightDragon.detach();
-    $goRight.detach();
-
-    
-    
-    if (player.items !== sword) {
-        $getASword.appendTo($('#gameText'))
-    }else{
+    $goRight.detach();    
+    // if (player.items ==! sword) {
+    //     $getASword.appendTo($('#gameText'))
+    // }else{
         $startFight.appendTo($('#gameText'));
         $attack.appendTo($('#console'));
         $drinkAle.appendTo($('#console'))
         while (player.health > 0){
-           $attack.on('click', player.attackDragon(Dragon))
+           $attack.on('click', player.attackDragon(dragon))
            $drinkAle.on('click', drinkAle);                    
          if (dragon.health > 0) {
             dragon.attackPlayer
          }
             if (dragon.health <= 0){
-                $dragonDeath.appendTO($('#gameText'))
+                $dragonDeath.appendTo($('#gameText'))
                 } else if (player.health <= 0){
                 $playerDeath.appendTo($('#gameText'))
+                startGame()
             }
         } 
-    }
+    // }
 }
-//////go back///
 
-//////Go straight, pick up sword///
-/////go back///
-
-
-///////Go Right, fight dragon/////
-
-//////Dragon fight///////
 
 $rightButton.on('click', goRight);
 $straightButton.on('click', goStraight);
