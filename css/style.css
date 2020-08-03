@@ -27,13 +27,16 @@ body{
     width:60%;
     height: 150px;
     border: 2px solid black;
-    display: flex;
+    display:flex;
 }
 .buttons{
     Height:80px;
     width: 100px;
-    justify-content: space-around;
+    align-items: center;
     background-color: green;
     text-transform: capitalize;
-    font-size: 30px;
+    font-size: 25px;
+    border-radius: 10%;
+    margin: 2px;
+    text-align: center;
 }

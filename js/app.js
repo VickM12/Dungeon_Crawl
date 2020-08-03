@@ -28,13 +28,13 @@ class Dragon extends Character {
         $playerMiss.detach()
         $playerAttack.detach()
         $dragonAttack.detach()
-        $dragonMiss.deatch()
+        $dragonMiss.detach()
         if (Math.random() <= player.dexterity) {
             $dragonAttack.appendTo($('#gameText'))
              player.health= player.health - this.strength;
         }   else $dragonMiss.appendTo($('#gameText'))
         console.log(player.health)
-    return player.health;
+    // return player.health;
 
     }
 }
@@ -60,7 +60,7 @@ class Player extends Character {
              dragon.health= dragon.health - this.strength;
         }   else $playerMiss.appendTo($('#gameText'))
         console.log(dragon.health)
-    return dragon.health;
+    // return dragon.health;
     }
     
 }
@@ -106,7 +106,7 @@ const $dragonMiss = $(`<p id="dragonMiss">As ${dragon.name} rears back and takes
 const $playerDeath = $(`<p id="playerDeath">Searing pain rips through your chest. You fall to your knees as a warm wet sensation covers your front. Dropping the sword you look up at the mighty ${dragon.name}. 
     "Yes," he murmurs softly, "Why did they send you to me? You don't even know." As you drift into the void, you feel your body being gently lifted from the cold hard ground. Warmth surrounds you and slowly ebbs into the darkness.</p>`)
 const $dragonDeath = $(`<p id="dragonDeath">With a mighty blow, the sword in your hand almost seems to lead you as it plunges deep into the dragon's hide. ${dragon.name} shrieks in agony and pulls back, ripping the sword from your hand. As he writhes in pain, you jump back and he falls to the ground. Slowly you approach him. There is no anger or fear in his eyes. What is it? Relief? Appreciation?
-    "YOu don't know why they sent you to kill me do you." It's a statement, not a question. You gulp realizing that the villagers never told you what the ${dragon.name} had done to them. Was it merely their own fear?
+    "You don't know why they sent you to kill me do you." It's a statement, not a question. You gulp realizing that the villagers never told you what the ${dragon.name} had done to them. Was it merely their own fear?
     "I was brought here long ago as a hatchling," ${dragon.name} sighs, "Now I can finally be free." You leave the dungeon, shaken.</p>`)
 
 
@@ -273,34 +273,33 @@ const dragonFight =()=>{
     $attack.appendTo($('#console'));
     $drinkAleBtn.appendTo($('#console'))
     $continue.appendTo($('#console'));
-
-    $attack.on('click', event => {
     
-    while (player.health > 0){
+    if (player.health > 0){
         $attack.on('click', player.attackDragon(dragon))
         $drinkAleBtn.on('click', drinkAle);
-        $continue.on('click', event =>{
+        // $continue.on('click', event =>{
 
-            if (dragon.health > 0) { 
-                   dragon.attackPlayer(player)
+        //     if (dragon.health > 0) { 
+        //            dragon.attackPlayer(player)
                                   
-            } else if (player.health <= 0){
-                $dragonAttack.detach()
-                $dragonMiss.detach()
-                $playerDeath.appendTo($('#gameText'))
-                startGame()
+        //     } else if (player.health <= 0){
+        //         $dragonAttack.detach()
+        //         $dragonMiss.detach()
+        //         $playerDeath.appendTo($('#gameText'))
+        //         startGame()
                 
-            } else if (dragon.health <= 0){
-                $dragonAttack.detach()
-                $dragonMiss.detach()
-                $playerAttack.detach()
-                $playerMiss.detach()
-                $dragonDeath.appendTo($('#gameText'))
-                }
-            }) 
-        } 
-    })
-}  
+        //     } else if (dragon.health <= 0){
+        //         $dragonAttack.detach()
+        //         $dragonMiss.detach()
+        //         $playerAttack.detach()
+        //         $playerMiss.detach()
+        //         $dragonDeath.appendTo($('#gameText'))
+        //         }
+        // }) 
+    } 
+}
+
+  
 
 
 // $fightDragon.on('click', dragonFight)
