@@ -243,4 +243,4 @@ $straightButton.on('click', goStraight);
 $leftButton.on('click', goLeft);
 $goBack.on('click', goBack);
 $enterButton.on('click', enterDungeon);
-onLoad=startGame();
+onload=startGame();
