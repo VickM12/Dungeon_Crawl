@@ -17,6 +17,11 @@ body{
     align-items:center;
     flex-direction: column;
 }
+h2 {
+    padding: 2px;
+    margin: 1px;
+}
+
 #textbox{
     width:60%;
     height: 400px;

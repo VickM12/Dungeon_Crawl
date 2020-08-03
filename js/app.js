@@ -73,6 +73,13 @@ const sword = {
     name: "Magical Sword"
 }
 ////Divs to be appended///
+///Health Status///
+// const $playerHP = $(`<h2 id="playerHealth">Your health is ${player.health}</h2>`)
+// $playerHP.prependTo($('.gameBox'))
+
+// const $dragonHP = $(`<h2 id="dragonHealth"> Dragon health is ${dragon.health}</h2>`)
+// $dragonHP.prependTo($('.gameBox'))
+
 ///Text boxes///
 const $welcome = $(`<p id="welcome">Welcome Adventurer! We, the local villagers have been terrorized by the mighty dragon, Kh'O Vah, will you enter the dungeon and slay the beast?</p>`)
 
@@ -213,6 +220,7 @@ const goLeft =()=>{
 
             $takeItem.on('click', event=>{
                 $exploreAleRoom.detach()
+                $takeItem.detach()
                 $takeAle.appendTo($('#gameText'))
                 player.items.push(ale)
             })
@@ -274,8 +282,7 @@ const dragonFight =()=>{
     $startFight.appendTo($('#gameText'));
     $attack.appendTo($('#console'));
     $drinkAleBtn.appendTo($('#console'))
-    $continue.appendTo($('#console'));
-    
+        
     $attack.on('click', event =>{
         $startFight.detach()
         $dragonMiss.detach()
@@ -289,32 +296,22 @@ const dragonFight =()=>{
              $continue.on('click', dragon.attackPlayer(player))
         }   else if (dragon.health <= 0) {
             $dragonDeath.appendTo($('#gameText'))
-            $continue.on('click', startGame)
+            $attack.detach()
+            $drinkAleBtn.detach()
+            $goBack.detach()
+            $continue.appendTo($('#console'));
+            $continue.on('click', window.location.reload)
         }
         else {$playerDeath.appendTo($('#gameText'))
-        $continue.on('click', startGame)
+        $attack.detach()
+        $drinkAleBtn.detach()
+        $goBack.detach()
+        $continue.appendTo($('#console'));
+        $continue.on('click', window.location.reload)
         }
-                                  
-        //     } else if (player.health <= 0){
-        //         $dragonAttack.detach()
-        //         $dragonMiss.detach()
-        //         $playerDeath.appendTo($('#gameText'))
-        //         startGame()
-                
-        //     } else if (dragon.health <= 0){
-        //         $dragonAttack.detach()
-        //         $dragonMiss.detach()
-        //         $playerAttack.detach()
-        //         $playerMiss.detach()
-        //         $dragonDeath.appendTo($('#gameText'))
-        //         }
-        }) 
+    }) 
 } 
 
-  
-
-
-// $fightDragon.on('click', dragonFight)
 $rightButton.on('click', goRight);
 $straightButton.on('click', goStraight);
 $leftButton.on('click', goLeft);
