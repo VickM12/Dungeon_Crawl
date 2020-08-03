@@ -264,7 +264,7 @@ const dragonFight =()=>{
                 $playerDeath.appendTo($('#gameText'))
             }
         } 
-
+    }
 }
 //////go back///
 
