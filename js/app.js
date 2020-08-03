@@ -127,7 +127,7 @@ $fightDragon.text('fight the dragon')
 const $attack =$('<div class="buttons" id="attack">')
 $attack.text('attack');
 
-const $drinkAle =$('div class="buttons" id="drinkAle">')
+const $drinkAle =$('<div class="buttons" id="drinkAle">')
 $drinkAle.text('drink ale');
 
 /////////////////////////Functions/////////////
@@ -161,6 +161,7 @@ const goBack =()=>{
     $takeItem.detach()
     $exploreAleRoom.detach()
     $exploreLightRoom.detach()
+    $getASword.detach()
     
     $turnBack.appendTo($('gameBox'))
     $enterDungeon.appendTo($('#gameText'))
@@ -246,11 +247,13 @@ const dragonFight =()=>{
     $fightDragon.detach();
     $goRight.detach();
 
-    $startFight.appendTo($('#gameText'));
-    $attack.appendTo($('#console'));
+    
+    
     if (player.items !== sword) {
         $getASword.appendTo($('#gameText'))
     }else{
+        $startFight.appendTo($('#gameText'));
+        $attack.appendTo($('#console'));
         $drinkAle.appendTo($('#console'))
         while (player.health > 0){
            $attack.on('click', player.attackDragon(Dragon))
