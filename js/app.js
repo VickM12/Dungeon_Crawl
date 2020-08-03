@@ -25,10 +25,10 @@ class Dragon extends Character {
         this.items = items;
     }
     attackPlayer(player){
-        $playerMiss.detach()
-        $playerAttack.detach()
-        $dragonAttack.detach()
-        $dragonMiss.detach()
+        // $playerMiss.detach()
+        // $playerAttack.detach()
+        // $dragonAttack.detach()
+        // $dragonMiss.detach()
         if (Math.random() <= player.dexterity) {
             $dragonAttack.appendTo($('#gameText'))
              player.health= player.health - this.strength;
@@ -51,10 +51,10 @@ class Player extends Character {
         this.items = items;
     }
     attackDragon(Dragon){
-        $dragonMiss.detach()
-        $dragonAttack.detach()
-        $playerMiss.detach()
-        $playerAttack.detach()
+        // $dragonMiss.detach()
+        // $dragonAttack.detach()
+        // $playerMiss.detach()
+        // $playerAttack.detach()
         if (Math.random() <= dragon.dexterity) {
             $playerAttack.appendTo($('#gameText'))
              dragon.health= dragon.health - this.strength;
@@ -147,6 +147,8 @@ $continue.text('continue');
 
 /////Display the instructions////
 const startGame = () =>{
+    $dragonDeath.detach()
+    $playerDeath.detach()
     $welcome.appendTo($('#gameText'))
 $enterButton.appendTo('#console') 
 };
@@ -274,10 +276,23 @@ const dragonFight =()=>{
     $drinkAleBtn.appendTo($('#console'))
     $continue.appendTo($('#console'));
     
-    if (player.health > 0 && dragon.health>0){
-        $attack.on('click', player.attackDragon(dragon))
-        $drinkAleBtn.on('click', drinkAle);
-        $continue.on('click', dragon.attackPlayer(player))
+    $attack.on('click', event =>{
+        $startFight.detach()
+        $dragonMiss.detach()
+        $dragonAttack.detach()
+        $playerMiss.detach()
+        $playerAttack.detach()
+        $drinkAle.detach()
+        if (player.health > 0 && dragon.health>0){
+            player.attackDragon(dragon)
+             $drinkAleBtn.on('click', drinkAle);
+             $continue.on('click', dragon.attackPlayer(player))
+        }   else if (dragon.health <= 0) {
+            $dragonDeath.appendTo($('#gameText'))
+            $continue.on('click', startGame)
+        }
+        else {$playerDeath.appendTo($('#gameText'))
+        $continue.on('click', startGame)
         }
                                   
         //     } else if (player.health <= 0){
@@ -293,7 +308,7 @@ const dragonFight =()=>{
         //         $playerMiss.detach()
         //         $dragonDeath.appendTo($('#gameText'))
         //         }
-        // }) 
+        }) 
 } 
 
   
