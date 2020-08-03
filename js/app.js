@@ -1,4 +1,4 @@
-console.log($)
+
 //////////////////Constants and Objects///////
 let $inputValue = $("#input-box").val(); 
 console.log($inputValue)
@@ -86,6 +86,7 @@ const $goRight = $(`<p id="goRight">You go right. The hairs on the back of your 
     "BEAST?!" the dragon roars, "I AM NO BEAST! I am ${dragon.name}, and yes, I can peer into your thoughts!" Your legs quake, your mouth goes dry and your heart races.</p>`)
 
 const $startFight = $('<p id="startFight">You draw your sword and charge at the dragon</p>')
+const $getASword = $(`<p id="getASword">You need a sword before you can fight ${dragon.name}!</p>`)
 const $playerAttack = $(`<p id="playerAttack">You swing wildly at the dragon. The blade slices between the scales and cuts deep into the hide of the dragon. ${dragon.name} roars in agony</p>`)
 const $dragonAttack = $('<p id="dragonAttack">The dragon rears back and lunges at you, fire escaping from its snout as it strikes you with its claw.</p>')
 const $playerMiss = $(`<p id="playerMiss">As you clumsily swing your sword, you lose your balance and miss. ${dragon.name} laughs at your feeble attempt.</p>`)
@@ -122,6 +123,12 @@ $takeItem.text('take item');
 
 const $fightDragon =$('<div class="buttons" id="fightDragon">')
 $fightDragon.text('fight the dragon')
+
+const $attack =$('<div class="buttons" id="attack">')
+$attack.text('attack');
+
+const $drinkAle =$('div class="buttons" id="drinkAle">')
+$drinkAle.text('drink ale');
 
 /////////////////////////Functions/////////////
 
@@ -204,9 +211,11 @@ const goStraight =()=>{
         $goStraight.detach();
         
         $exploreLightRoom.appendTo($('#gameText'));
+        $exploreAleRoom.detach();
         $takeItem.appendTo($('#console'));
 
         $takeItem.on('click', event => { 
+            $takeSword.detach();
             $exploreLightRoom.detach();
             $takeItem.detach();
 
@@ -226,8 +235,37 @@ const goRight =() => {
     $goBack.appendTo($('#console'));
     $fightDragon.appendTo($('#console'));
 
-}
+    $fightDragon.on('click', dragonFight)
 
+}
+const drinkAle=()=>{
+    player.items.pop(ale);
+    player.health = (player.health +5)
+}
+const dragonFight =()=>{
+    $fightDragon.detach();
+    $goRight.detach();
+
+    $startFight.appendTo($('#gameText'));
+    $attack.appendTo($('#console'));
+    if (player.items !== sword) {
+        $getASword.appendTo($('#gameText'))
+    }else{
+        $drinkAle.appendTo($('#console'))
+        while (player.health > 0){
+           $attack.on('click', player.attackDragon(Dragon))
+           $drinkAle.on('click', drinkAle);                    
+         if (dragon.health > 0) {
+            dragon.attackPlayer
+         }
+            if (dragon.health <= 0){
+                $dragonDeath.appendTO($('#gameText'))
+                } else if (player.health <= 0){
+                $playerDeath.appendTo($('#gameText'))
+            }
+        } 
+
+}
 //////go back///
 
 //////Go straight, pick up sword///
