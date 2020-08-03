@@ -1,7 +1,7 @@
 
 //////////////////Constants and Objects///////
-let $inputValue = $("#input-box").val(); 
-console.log($inputValue)
+// let $inputValue = $("#input-box").val(); 
+// console.log($inputValue)
     
     
 ///Character Class///
@@ -14,28 +14,9 @@ class Character {
         this.items = items;
     }
 }
-///Player class///
-class Player extends Character {
-    constructor (name=`${$inputValue}`, health = 20, strength = 5, dexterity = 0.7, items =[]){
-        super(name, health, strength, dexterity, items)
-        this.name= name;
-        this.health = health;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.items = items;
-    }
-    attackDragon(dragon){
-        if (Math.random() <= dragon.dexterity) {
-            $playerAttack.appendTo($('#gameText'))
-             dragon.health= dragon.health - this.strength;
-        }   else $playerMiss.appendTo($('#gameText'))
-    return dragon.health
-    }
-    
-}
 ///Dragon class///
 class Dragon extends Character {
-    constructor (name=`${$inputValue}`, health = 20, strength = 5, dexterity = 0.6, items =[]){
+    constructor (name=``, health = 20, strength = 5, dexterity = 0.6, items =[]){
         super(name, health, strength, dexterity, items)
         this.name= name;
         this.health = health;
@@ -44,17 +25,46 @@ class Dragon extends Character {
         this.items = items;
     }
     attackPlayer(player){
+        $playerMiss.detach()
+        $playerAttack.detach()
+        $dragonAttack.detach()
+        $dragonMiss.deatch()
         if (Math.random() <= player.dexterity) {
             $dragonAttack.appendTo($('#gameText'))
              player.health= player.health - this.strength;
         }   else $dragonMiss.appendTo($('#gameText'))
-    return player.health
+        console.log(player.health)
+    return player.health;
 
     }
 }
+const dragon = new Dragon ("Kh'O Vah", health= 20, strength = 5, dexterity = 0.6, items = ['gold coins'])
 
-const player = new Player (`${$inputValue}`)
-const dragon = new Dragon ("Kh'O Vah", items = ['gold coins'])
+///Player class///
+class Player extends Character {
+    constructor (name=``, health = 20, strength = 5, dexterity = 0.7, items =[]){
+        super(name, health, strength, dexterity, items)
+        this.name= name;
+        this.health = health;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.items = items;
+    }
+    attackDragon(Dragon){
+        $dragonMiss.detach()
+        $dragonAttack.detach()
+        $playerMiss.detach()
+        $playerAttack.detach()
+        if (Math.random() <= dragon.dexterity) {
+            $playerAttack.appendTo($('#gameText'))
+             dragon.health= dragon.health - this.strength;
+        }   else $playerMiss.appendTo($('#gameText'))
+        console.log(dragon.health)
+    return dragon.health;
+    }
+    
+}
+const player = new Player (`Adventurer`)
 const ale = {
     name: "Ale",
     property: (player.heatlh= player.heatlh +5)
@@ -88,13 +98,14 @@ const $goRight = $(`<p id="goRight">You go right. The hairs on the back of your 
 const $startFight = $('<p id="startFight">You draw your sword and charge at the dragon</p>')
 const $getASword = $(`<p id="getASword">You need a sword before you can fight ${dragon.name}!</p>`)
 const $playerAttack = $(`<p id="playerAttack">You swing wildly at the dragon. The blade slices between the scales and cuts deep into the hide of the dragon. ${dragon.name} roars in agony</p>`)
+const $drinkAle= $('<p id="drinkAle">You crack open the barrel and have a drink. The ale is surprisingly good and refreshing. You feel recharged!"</p>')
 const $dragonAttack = $('<p id="dragonAttack">The dragon rears back and lunges at you, fire escaping from its snout as it strikes you with its claw.</p>')
 const $playerMiss = $(`<p id="playerMiss">As you clumsily swing your sword, you lose your balance and miss. ${dragon.name} laughs at your feeble attempt.</p>`)
 const $dragonMiss = $(`<p id="dragonMiss">As ${dragon.name} rears back and takes a deep breath in, you feel the sword in your hand tug you and pull you to the side. You stumble out of the way in the nick of time as a jet of fire shoots where you were just standing. ${dragon.name} snorts in disgust and disappointment.</p>`)
 
 const $playerDeath = $(`<p id="playerDeath">Searing pain rips through your chest. You fall to your knees as a warm wet sensation covers your front. Dropping the sword you look up at the mighty ${dragon.name}. 
     "Yes," he murmurs softly, "Why did they send you to me? You don't even know." As you drift into the void, you feel your body being gently lifted from the cold hard ground. Warmth surrounds you and slowly ebbs into the darkness.</p>`)
-const $dragonDeath = $(`<p id="dragonDeath">With a mighty blow, the sword in your hand almost seems to guide you as it plunges deep into the dragon's hide. ${dragon.name} shrieks in agony and pulls back, ripping the sword from your hand. As he writhes in pain, you jump back and he falls to the ground. Slowly you approach him. There is no anger or fear in his eyes. What is it? Relief? Appreciation?
+const $dragonDeath = $(`<p id="dragonDeath">With a mighty blow, the sword in your hand almost seems to lead you as it plunges deep into the dragon's hide. ${dragon.name} shrieks in agony and pulls back, ripping the sword from your hand. As he writhes in pain, you jump back and he falls to the ground. Slowly you approach him. There is no anger or fear in his eyes. What is it? Relief? Appreciation?
     "YOu don't know why they sent you to kill me do you." It's a statement, not a question. You gulp realizing that the villagers never told you what the ${dragon.name} had done to them. Was it merely their own fear?
     "I was brought here long ago as a hatchling," ${dragon.name} sighs, "Now I can finally be free." You leave the dungeon, shaken.</p>`)
 
@@ -127,9 +138,11 @@ $fightDragon.text('fight the dragon')
 const $attack =$('<div class="buttons" id="attack">')
 $attack.text('attack');
 
-const $drinkAle =$('<div class="buttons" id="drinkAle">')
-$drinkAle.text('drink ale');
+const $drinkAleBtn =$('<div class="buttons" id="drinkAle">')
+$drinkAleBtn.text('drink ale');
 
+const $continue =$('<div class="buttons" id="continue">')
+$continue.text('continue');
 /////////////////////////Functions/////////////
 
 /////Display the instructions////
@@ -162,6 +175,14 @@ const goBack =()=>{
     $exploreAleRoom.detach()
     $exploreLightRoom.detach()
     $getASword.detach()
+    $attack.detach()
+    $drinkAle.detach()
+    $drinkAleBtn.detach()
+    $dragonAttack.detach()
+    $dragonMiss.detach()
+    $playerAttack.detach()
+    $playerMiss.detach()
+    $continue.detach()
     
     $turnBack.appendTo($('gameBox'))
     $enterDungeon.appendTo($('#gameText'))
@@ -238,38 +259,51 @@ const goRight =() => {
     $fightDragon.appendTo($('#console'));
 
     $fightDragon.on('click', dragonFight)
-
 }
 const drinkAle=()=>{
     player.items.pop(ale);
-    player.health = (player.health +5)
+    player.health = player.health +5
+    $drinkAle.appendTo($('#gameText'))
 }
 const dragonFight =()=>{
     $fightDragon.detach();
     $goRight.detach();    
-    // if (player.items ==! sword) {
-    //     $getASword.appendTo($('#gameText'))
-    // }else{
-        $startFight.appendTo($('#gameText'));
-        $attack.appendTo($('#console'));
-        $drinkAle.appendTo($('#console'))
-        while (player.health > 0){
-           $attack.on('click', player.attackDragon(dragon))
-           $drinkAle.on('click', drinkAle);                    
-         if (dragon.health > 0) {
-            dragon.attackPlayer
-         }
-            if (dragon.health <= 0){
-                $dragonDeath.appendTo($('#gameText'))
-                } else if (player.health <= 0){
+
+    $startFight.appendTo($('#gameText'));
+    $attack.appendTo($('#console'));
+    $drinkAleBtn.appendTo($('#console'))
+    $continue.appendTo($('#console'));
+
+    $attack.on('click', event => {
+    
+    while (player.health > 0){
+        $attack.on('click', player.attackDragon(dragon))
+        $drinkAleBtn.on('click', drinkAle);
+        $continue.on('click', event =>{
+
+            if (dragon.health > 0) { 
+                   dragon.attackPlayer(player)
+                                  
+            } else if (player.health <= 0){
+                $dragonAttack.detach()
+                $dragonMiss.detach()
                 $playerDeath.appendTo($('#gameText'))
                 startGame()
-            }
+                
+            } else if (dragon.health <= 0){
+                $dragonAttack.detach()
+                $dragonMiss.detach()
+                $playerAttack.detach()
+                $playerMiss.detach()
+                $dragonDeath.appendTo($('#gameText'))
+                }
+            }) 
         } 
-    // }
-}
+    })
+}  
 
 
+// $fightDragon.on('click', dragonFight)
 $rightButton.on('click', goRight);
 $straightButton.on('click', goStraight);
 $leftButton.on('click', goLeft);
