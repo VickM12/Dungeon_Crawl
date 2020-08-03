@@ -274,13 +274,11 @@ const dragonFight =()=>{
     $drinkAleBtn.appendTo($('#console'))
     $continue.appendTo($('#console'));
     
-    if (player.health > 0){
+    if (player.health > 0 && dragon.health>0){
         $attack.on('click', player.attackDragon(dragon))
         $drinkAleBtn.on('click', drinkAle);
-        // $continue.on('click', event =>{
-
-        //     if (dragon.health > 0) { 
-        //            dragon.attackPlayer(player)
+        $continue.on('click', dragon.attackPlayer(player))
+        }
                                   
         //     } else if (player.health <= 0){
         //         $dragonAttack.detach()
