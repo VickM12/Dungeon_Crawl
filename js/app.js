@@ -300,7 +300,7 @@ const dragonFight =()=>{
     $startFight.appendTo($('#gameText'));
     $attack.appendTo($('#console'));
    
-    if(player.items.includes(ale=== true)){
+    if (player.items.includes(ale) === true){
     $drinkAleBtn.appendTo($('#console'))
     }
         
