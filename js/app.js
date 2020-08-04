@@ -191,6 +191,7 @@ const goBack =()=>{
     $playerAttack.detach()
     $playerMiss.detach()
     $continue.detach()
+    $fightDragon.detach()
     
     $turnBack.appendTo($('gameBox'))
     $enterDungeon.appendTo($('#gameText'))

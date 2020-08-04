@@ -16,6 +16,8 @@ body{
     display:flex;
     align-items:center;
     flex-direction: column;
+    background-image: url('dungeon.jpg');
+    background-size: cover;
 }
 h2 {
     padding: 2px;
@@ -25,13 +27,13 @@ h2 {
 #textbox{
     width:60%;
     height: 400px;
-    background-color: ghostwhite;
+    background-color:rgba(248, 248, 255, 0.75);
     margin: 10px;
+
 }
 #console{
     width:60%;
     height: 150px;
-    border: 2px solid black;
     display:flex;
 }
 .buttons{
@@ -49,4 +51,14 @@ h2 {
 }
 #dragonDeath {
     font-size: 20px;
+}
+
+@media (max-width:600px) {
+   p{ 
+    font-size:15px;
+   }
+    #dragonDeath {
+        font-size: 15px;
+
+}
 }
