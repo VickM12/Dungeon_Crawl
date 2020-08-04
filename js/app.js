@@ -33,8 +33,8 @@ class Dragon extends Character {
             $dragonAttack.appendTo($('#gameText'))
              player.health= player.health - this.strength;
         }   else $dragonMiss.appendTo($('#gameText'))
-        console.log(player.health)
-    // return player.health;
+        console.log(`player health is ${player.health}`)
+        $playerHP.text(`Your health is ${player.health}`)
 
     }
 }
@@ -59,8 +59,8 @@ class Player extends Character {
             $playerAttack.appendTo($('#gameText'))
              dragon.health= dragon.health - this.strength;
         }   else $playerMiss.appendTo($('#gameText'))
-        console.log(dragon.health)
-    // return dragon.health;
+        console.log(`Dragon health is ${dragon.health}`)
+        $dragonHP.text(`Dragon health is ${dragon.health}`)
     }
     
 }
@@ -74,11 +74,11 @@ const sword = {
 }
 ////Divs to be appended///
 ///Health Status///
-// const $playerHP = $(`<h2 id="playerHealth">Your health is ${player.health}</h2>`)
-// $playerHP.prependTo($('.gameBox'))
+const $dragonHP = $(`<h2 id="dragonHealth"> Dragon health is ${dragon.health}</h2>`)
 
-// const $dragonHP = $(`<h2 id="dragonHealth"> Dragon health is ${dragon.health}</h2>`)
-// $dragonHP.prependTo($('.gameBox'))
+const $playerHP = $(`<h2 id="playerHealth">Your health is ${player.health}</h2>`)
+
+
 
 ///Text boxes///
 const $welcome = $(`<p id="welcome">Welcome Adventurer! We, the local villagers have been terrorized by the mighty dragon, Kh'O Vah, will you enter the dungeon and slay the beast?</p>`)
@@ -138,6 +138,9 @@ $goBack.text('go back');
 const $takeItem = $('<div class="buttons" id="takeItem">');
 $takeItem.text('take item');
 
+const $takeSwordBtn =$('<div class="buttons" id="takeItem">');
+$takeSwordBtn.text('take sword');
+
 const $fightDragon =$('<div class="buttons" id="fightDragon">')
 $fightDragon.text('fight the dragon')
 
@@ -160,7 +163,43 @@ $enterButton.appendTo('#console')
 };
 
 
-///////Set the scene/////
+///////Utility Functions/////
+const pickUpAle = ()=>{
+    $exploreAleRoom.detach()
+    $takeSwordBtn.detach()
+    $takeItem.detach()
+    $takeAle.appendTo($('#gameText'))
+    player.items.push(ale)
+}
+
+const pickUpSword =()=>{
+    $takeSwordBtn.detach();
+    $exploreLightRoom.detach();
+    $takeItem.detach();
+    $takeAle.detach();
+    $takeSword.detach()
+
+    $takeSword.appendTo($('#gameText'));
+    player.items.push(sword);
+}
+
+const getSword= ()=>{
+    $goRight.detach()
+    $getASword.appendTo($('#gameText'))
+    $fightDragon.detach()
+}
+const drinkAle=()=>{
+    $drinkAleBtn.detach()
+    player.items.pop(ale);
+    player.health = player.health +5
+    $drinkAle.appendTo($('#gameText'))
+
+}
+const replay =()=>{
+location.reload();
+}
+
+
 
 ////////Choice to go left, right, or straight////
 const enterDungeon = () =>{
@@ -179,6 +218,7 @@ const goBack =()=>{
     $goBack.detach()
     $takeAle.detach()
     $takeSword.detach()
+    $takeSwordBtn.detach()
     $takeItem.detach()
     $exploreAleRoom.detach()
     $exploreLightRoom.detach()
@@ -213,19 +253,16 @@ const goLeft =()=>{
 
 
     $explore.on('click', event=>{
-        $explore.detach()
+        $explore.detach();
         $goLeft.detach();
+        $exploreLightRoom.detach();
+        $takeSwordBtn.detach();
 
         $exploreAleRoom.appendTo($('#gameText'))
         $takeItem.appendTo($('#console'))
 
-            $takeItem.on('click', event=>{
-                $exploreAleRoom.detach()
-                $takeItem.detach()
-                $takeAle.appendTo($('#gameText'))
-                player.items.push(ale)
-            })
-        })
+        $takeItem.on('click', pickUpAle)
+    })
 }
 
 const goStraight =()=>{
@@ -242,20 +279,14 @@ const goStraight =()=>{
         $explore.detach();
         $straightButton.detach();
         $goStraight.detach();
+        $takeAle.detach();
+        $takeItem.detach()
         
         $exploreLightRoom.appendTo($('#gameText'));
         $exploreAleRoom.detach();
-        $takeItem.appendTo($('#console'));
+        $takeSwordBtn.appendTo($('#console'));
 
-        $takeItem.on('click', event => { 
-            $takeSword.detach();
-            $exploreLightRoom.detach();
-            $takeItem.detach();
-            $takeAle.detach();
-
-            $takeSword.appendTo($('#gameText'));
-            player.items.push(sword);
-        })
+        $takeSwordBtn.on('click', pickUpSword)
     })
 }
 
@@ -278,25 +309,14 @@ const goRight =() => {
     })
 }
 
-const getSword= ()=>{
-    $goRight.detach()
-    $getASword.appendTo($('#gameText'))
-    $fightDragon.detach()
-}
-const drinkAle=()=>{
-    $drinkAleBtn.detach()
-    player.items.pop(ale);
-    player.health = player.health +5
-    $drinkAle.appendTo($('#gameText'))
-}
-const replay =()=>{
-location.reload();
-}
+
 
 const dragonFight =()=>{
     $fightDragon.detach();
     $goRight.detach();    
 
+    $dragonHP.prependTo($('.gameBox'))
+    $playerHP.prependTo($('.gameBox'))
     $startFight.appendTo($('#gameText'));
     $attack.appendTo($('#console'));
    

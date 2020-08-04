@@ -19,9 +19,10 @@ body{
     background-image: url('dungeonwall.jpg');
     background-size: cover;
 }
-h2 {
+#playerHealth, #dragonHealth {
     padding: 2px;
     margin: 1px;
+    background-color:rgba(248, 248, 255, 0.75);
 }
 
 #textbox{
