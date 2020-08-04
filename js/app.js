@@ -192,6 +192,7 @@ const goBack =()=>{
     $playerMiss.detach()
     $continue.detach()
     $fightDragon.detach()
+    $startFight.detach()
     
     $turnBack.appendTo($('gameBox'))
     $enterDungeon.appendTo($('#gameText'))
@@ -272,7 +273,8 @@ const goRight =() => {
     $fightDragon.on('click', event => {
         if (player.items.includes(sword)===false) {
             getSword();
-        }else{dragonFight()}
+        }else{dragonFight()
+        }
     })
 }
 
@@ -288,7 +290,7 @@ const drinkAle=()=>{
     $drinkAle.appendTo($('#gameText'))
 }
 const replay =()=>{
-window.location.reload;
+location.reload();
 }
 
 const dragonFight =()=>{
@@ -297,7 +299,10 @@ const dragonFight =()=>{
 
     $startFight.appendTo($('#gameText'));
     $attack.appendTo($('#console'));
+   
+    if(player.items.includes(ale=== true)){
     $drinkAleBtn.appendTo($('#console'))
+    }
         
     $attack.on('click', event =>{
         $startFight.detach()
@@ -316,18 +321,18 @@ const dragonFight =()=>{
             $drinkAleBtn.detach()
             $goBack.detach()
             $continue.appendTo($('#console'));
-            $continue.on('click', replay())
+            // $continue.on('click', replay())
         }
         else {$playerDeath.appendTo($('#gameText'))
         $attack.detach()
         $drinkAleBtn.detach()
         $goBack.detach()
         $continue.appendTo($('#console'));
-        $continue.on('click', replay())
+        
         }
     }) 
 } 
-
+$continue.on('click', replay)
 $rightButton.on('click', goRight);
 $straightButton.on('click', goStraight);
 $leftButton.on('click', goLeft);

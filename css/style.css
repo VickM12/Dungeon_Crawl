@@ -16,7 +16,7 @@ body{
     display:flex;
     align-items:center;
     flex-direction: column;
-    background-image: url('dungeon.jpg');
+    background-image: url('dungeonwall.jpg');
     background-size: cover;
 }
 h2 {
@@ -58,7 +58,7 @@ h2 {
     font-size:15px;
    }
     #dragonDeath {
-        font-size: 15px;
+        font-size: 12px;
     }
     #goRight {
         font-size: 12px;
