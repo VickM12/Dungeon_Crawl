@@ -67,7 +67,7 @@ class Player extends Character {
 const player = new Player (`Adventurer`)
 const ale = {
     name: "Ale",
-    // property: (player.heatlh = player.heatlh +5)
+    property: (player.heatlh = player.heatlh +5)
 }
 const sword = {
     name: "Magical Sword"
