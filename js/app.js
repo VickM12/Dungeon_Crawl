@@ -67,7 +67,7 @@ class Player extends Character {
 const player = new Player (`Adventurer`)
 const ale = {
     name: "Ale",
-    property: (player.heatlh= player.heatlh +5)
+    // property: (player.heatlh = player.heatlh +5)
 }
 const sword = {
     name: "Magical Sword"
@@ -115,6 +115,8 @@ const $playerDeath = $(`<p id="playerDeath">Searing pain rips through your chest
 const $dragonDeath = $(`<p id="dragonDeath">With a mighty blow, the sword in your hand almost seems to lead you as it plunges deep into the dragon's hide. ${dragon.name} shrieks in agony and pulls back, ripping the sword from your hand. As he writhes in pain, you jump back and he falls to the ground. Slowly you approach him. There is no anger or fear in his eyes. What is it? Relief? Appreciation?
 "You don't know why they sent you to kill me do you." It's a statement, not a question. You gulp realizing that the villagers never told you what the ${dragon.name} had done to them. Was it merely their own fear?
 "I was brought here long ago as a hatchling," ${dragon.name} sighs, "Now I can finally be free." You leave the dungeon, shaken.</p>`)
+const $bothDie =$(`<p id ="bothDie">You and ${dragon.name} both lunge at each other. Your sword buries itself deep in his hide while his mighty claw tears through your body. You look up into his great eyes, now softened as he gazes down at you. Is that a tear forming? You slump over while ${dragon.name} cradles you in one of his claws. 
+"You may rest now with me," he murmurs, "You fought well." Together you drift into the void.</p>`) 
 
 ///Buttons///
 const $enterButton = $('<div class="buttons" id="enter">');
@@ -167,7 +169,7 @@ $enterButton.appendTo('#console')
 const pickUpAle = ()=>{
     $exploreAleRoom.detach()
     $takeSwordBtn.detach()
-    $takeItem.detach()
+    $takeItem.remove()
     $takeAle.appendTo($('#gameText'))
     player.items.push(ale)
 }
@@ -253,6 +255,9 @@ const goLeft =()=>{
 
 
     $explore.on('click', event=>{
+        if (player.items.includes(ale)=== true){
+            $takeItem.detach()
+        }
         $explore.detach();
         $goLeft.detach();
         $exploreLightRoom.detach();
@@ -331,19 +336,23 @@ const dragonFight =()=>{
         $playerMiss.detach()
         $playerAttack.detach()
         $drinkAle.detach()
-        if (player.health > 0 && dragon.health>0){
+        if (player.health > 0 && dragon.health > 0){
             player.attackDragon(dragon)
              $drinkAleBtn.on('click', drinkAle);
              $continue.on('click', dragon.attackPlayer(player))
-        }   else if (dragon.health <= 0) {
-            $dragonDeath.appendTo($('#gameText'))
-            $attack.detach()
-            $drinkAleBtn.detach()
-            $goBack.detach()
-            $continue.appendTo($('#console'));
-            // $continue.on('click', replay())
-        }
-        else {$playerDeath.appendTo($('#gameText'))
+        }   else if (player.health <= 0 && dragon.health <= 0){  
+            $attack.detach();
+            $drinkAleBtn.detach();
+            $goBack.detach();
+            $bothDie.appendTo($('#gameText'));
+            $continue.appendTo($('#console'));  
+         } else if (dragon.health <= 0) {
+                $dragonDeath.appendTo($('#gameText'))
+                $attack.detach()
+                $drinkAleBtn.detach()
+                $goBack.detach()
+                $continue.appendTo($('#console'));       
+        } else {$playerDeath.appendTo($('#gameText'))
         $attack.detach()
         $drinkAleBtn.detach()
         $goBack.detach()
