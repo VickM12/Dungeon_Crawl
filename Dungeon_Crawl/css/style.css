@@ -1,0 +1,70 @@
+body{
+    background-color: gray;
+    /* background-image: url('dungeonwall.jpg');
+    background-size: cover; */
+
+}
+.topBanner{
+    text-transform: uppercase;
+    font-family: 'Grenze Gotisch', cursive;
+    font-size: 50px;
+}
+
+.gameBox{
+    width:100%;
+    height:600px;
+    border:2px;
+    border-color: black;
+    border-style: solid;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    background-image: url('dungeonwall.jpg');
+    background-size: cover;
+}
+#playerHealth, #dragonHealth {
+    padding: 2px;
+    margin: 1px;
+    background-color:rgba(248, 248, 255, 0.75);
+}
+
+#textbox{
+    width:60%;
+    height: 400px;
+    background-color:rgba(248, 248, 255, 0.75);
+    margin: 10px;
+
+}
+#console{
+    width:60%;
+    height: 150px;
+    display:flex;
+}
+.buttons{
+    Height:80px;
+    width: 100px;
+    align-items: center;
+    background-color:green;
+    text-transform: capitalize;
+    font-size: 25px;
+    font-family: 'Grenze Gotisch', cursive;
+    border-radius: 10%;
+    margin: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+#dragonDeath {
+    font-size: 20px;
+}
+
+@media (max-width:600px) {
+   p{ 
+    font-size:15px;
+   }
+    #dragonDeath {
+        font-size: 12px;
+    }
+    #goRight {
+        font-size: 12px;
+    }
+}
