@@ -154,6 +154,8 @@ $drinkAleBtn.text('drink ale');
 
 const $continue =$('<div class="buttons" id="continue">')
 $continue.text('continue');
+
+
 /////////////////////////Functions/////////////
 
 /////Display the instructions////
@@ -236,8 +238,8 @@ const goBack =()=>{
     $fightDragon.detach()
     $startFight.detach()
     
-    $turnBack.appendTo($('gameBox'))
-    $enterDungeon.appendTo($('#gameText'))
+    $turnBack.appendTo($('#gameText'))
+    // $enterDungeon.appendTo($('#gameText'))
     $leftButton.appendTo('#console')
     $rightButton.appendTo('#console')
     $straightButton.appendTo('#console')
@@ -248,6 +250,7 @@ const goLeft =()=>{
     $leftButton.detach();
     $rightButton.detach();
     $straightButton.detach();
+    $turnBack.detach();
     
     $goLeft.appendTo($('#gameText'));
     $explore.appendTo($('#console'));
@@ -275,6 +278,7 @@ const goStraight =()=>{
     $leftButton.detach();
     $rightButton.detach();
     $straightButton.detach();
+    $turnBack.detach()
     
     $goStraight.appendTo($('#gameText'));
     $explore.appendTo($('#console'));
@@ -300,6 +304,7 @@ const goRight =() => {
     $leftButton.detach();
     $rightButton.detach();
     $straightButton.detach();
+    $turnBack.detach();
     
     $goRight.appendTo($('#gameText'));
     $goBack.appendTo($('#console'));
